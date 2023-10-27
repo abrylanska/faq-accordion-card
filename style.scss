@@ -1,0 +1,296 @@
+@import "variables";
+
+@mixin flexCenter($direction) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin absoluteCenter($top) {
+  position: absolute;
+  top: $top;
+  right: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  background: $gradient;
+  font-family: $sans-serif;
+  font-weight: $normal;
+}
+
+h1 {
+  font-size: $big;
+}
+
+h1, h2, p {
+  margin: 0;
+}
+
+span {
+  font-family: $sans-serif;
+}
+
+button {
+  padding: 0;
+}
+
+.wrapper {
+  @include flexCenter(unset);
+
+  width: 100%;
+  height: 100vh;
+  padding: 148px 24px 100px;
+}
+
+.container {
+  @include flexCenter(column);
+
+  position: relative;
+
+  width: 100%;
+
+  border-radius: 23px;
+}
+
+.box {
+  display: none;
+}
+
+.card {
+  @include flexCenter(column);
+
+  position: relative;
+
+  width: 100%;
+  max-width: 576px;
+  padding: 28px 24px 48px;
+
+  background: $white;
+  border-radius: 23px;
+  box-shadow: 0px 50px 50px -20px rgba(53, 18, 122, 0.50);
+}
+
+.card__image-desktop {
+  display: none;
+}
+
+.card__image-mobile {
+  img {
+    width: 100%;
+    max-width: 240px;
+  }
+
+  img:first-child {
+    @include absoluteCenter(-19px);
+  }
+
+  img:nth-child(2) {
+    @include absoluteCenter(53px);
+  }
+}
+
+.card__acc {
+  width: 100%;
+
+  h1 {
+    margin: 104px 0 21px;
+
+    text-align: center;
+  }
+
+}
+
+.accordion__question {
+  border-bottom: 1px solid $lightGrey;
+}
+
+.question__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 19px 0 18px 1px;
+
+  border: none;
+  background: $white;
+
+}
+
+.question__item-title {
+  margin-right: 8px;
+
+  color: $darkGrey;
+  font-size: $mediumMobile;
+  text-align: left;
+}
+
+.question__item-icon {
+  align-self: flex-start;
+
+  transition: transform 0.4s ease;
+}
+
+.accordion__answer {
+  display: none;
+
+  padding-bottom: 16px;
+
+  p {
+    margin-right: 16px;
+
+    font-size: $small;
+    line-height: 18px;
+    color: $grey;
+  }
+
+}
+
+.up {
+  transform: rotate(180deg);
+}
+
+.opened {
+  display: block;
+
+  transition: all 0.4s ease;
+
+  padding-top: 7px;
+
+  border-bottom: 1px solid $lightGrey;
+}
+
+.attribution {
+  display: block;
+
+  width: 100%;
+  padding: 32px;
+
+  color: var(--light-blue);
+  text-align: center;
+
+  .attribution a {
+    text-decoration: none;
+    color: #B3B1FA;
+  }
+}
+
+
+
+@media only screen and (min-width: 992px) {
+  .wrapper {
+    padding: 24px 56px;
+  }
+
+
+  .container {
+    flex-direction: row;
+
+    width: 100%;
+    max-width: 920px;
+  }
+
+
+  .box {
+    display: block;
+
+    position: absolute;
+    left: 3px;
+    top: 59%;
+    transform: translate(-50%,-50%);
+    z-index: 2;
+  }
+
+
+  .card {
+    flex-direction: row;
+    overflow: hidden;
+
+    width: 100%;
+    max-width: 920px;
+    padding: 65px 95px 83px;
+  }
+
+  .card__image-desktop {
+    display: block;
+
+    width: 50%;
+
+    img:first-child{
+      position: absolute;
+      left: 17%;
+      top: 50%;
+      z-index: 1;
+      transform: translate(-50%,-50%);
+
+      width: 100%;
+      max-width: 475px;
+    }
+
+    img:nth-child(2){
+      position: absolute;
+      left: -9%;
+      top: 34%;
+      transform: translate(-50%,-50%);
+    }
+  }
+
+  .card__image-mobile {
+    display: none;
+  }
+
+  .card__acc {
+    width: 50%;
+    max-width: 350px;
+
+    h1 {
+      margin: 0 0 26px;
+
+      text-align: left;
+    }
+  }
+
+  .question__item-title {
+    font-size: 14px;
+
+    &:hover {
+      color: $orange;
+      cursor: pointer;
+    }
+  }
+
+  .question__item-icon {
+    margin-right: 16px;
+  }
+
+  .accordion__answer p {
+    margin-right: 31px;
+  }
+
+  .attribution a:hover {
+    color: $white;
+    cursor: pointer;
+  }
+}
+
+
+@media only screen and (max-width: 991px) and (min-width: 480px) {
+  .card {
+    padding: 28px 48px 48px;
+  }
+}
